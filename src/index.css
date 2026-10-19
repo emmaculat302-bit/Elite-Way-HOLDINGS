@@ -21,8 +21,20 @@ body {
 }
 h1, h2, h3, .font-black { font-family: "Space Grotesk", Inter, sans-serif; }
 
-#particles-canvas {
+#stars-canvas {
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  width: 100%; height: 100%;
+  display: block;
+}
+.float-logo {
+  animation: floatLogo 6s ease-in-out infinite;
+}
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .float-logo { animation: none; }
 }
 .floating-shapes {
   position: fixed; inset: 0; pointer-events: none; z-index: 0; perspective: 1000px;

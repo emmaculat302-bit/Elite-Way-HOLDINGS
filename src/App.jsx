@@ -8,9 +8,10 @@ import CRM from './systems/CRM'
 import Healthcare from './systems/Healthcare'
 import Business from './systems/Business'
 import MotionFX, { CountUp } from './MotionFX'
+import SiteChat from './SiteChat'
+import Stars from './Stars'
 
 const asset = (p) => `${import.meta.env.BASE_URL}${String(p).replace(/^\//, '')}`
-import SiteChat from './SiteChat'
 
 const IMG = 'https://res.cloudinary.com/f4lhkjhs/image/upload/f_auto,q_auto/eliteway'
 const SITE = 'https://www.eliteway.co.za'
@@ -663,16 +664,21 @@ function Home() {
   ]
   return (
     <div className="pt-24 pb-20 px-6 max-w-7xl mx-auto space-y-14">
-      <section>
-        <h1 className="text-4xl md:text-5xl font-black leading-tight max-w-3xl">
-          Still running the business on a WhatsApp status?
-        </h1>
-        <p className="mt-4 text-white/70 max-w-xl text-lg">Pretoria software house. A real site and a convert path — not a bio link.</p>
-        <dl className="mt-8 grid grid-cols-3 gap-4 max-w-xl">
-          <div><dt className="text-2xl font-black">2.5M+</dt><dd className="text-xs text-white/45">Embedded organic views</dd></div>
-          <div><dt className="text-2xl font-black">100</dt><dd className="text-xs text-white/45">GDE East school halls</dd></div>
-          <div><dt className="text-2xl font-black">500+</dt><dd className="text-xs text-white/45">Club SA contacts</dd></div>
-        </dl>
+      <section className="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 className="text-4xl md:text-5xl font-black leading-tight max-w-3xl">
+            Still running the business on a WhatsApp status?
+          </h1>
+          <p className="mt-4 text-white/70 max-w-xl text-lg">Pretoria software house. A real site and a convert path — not a bio link.</p>
+          <dl className="mt-8 grid grid-cols-3 gap-4 max-w-xl">
+            <div><dt className="text-2xl font-black">2.5M+</dt><dd className="text-xs text-white/45">Embedded organic views</dd></div>
+            <div><dt className="text-2xl font-black">100</dt><dd className="text-xs text-white/45">GDE East school halls</dd></div>
+            <div><dt className="text-2xl font-black">500+</dt><dd className="text-xs text-white/45">Club SA contacts</dd></div>
+          </dl>
+        </div>
+        <div className="hidden lg:flex justify-center">
+          <img src={asset('logo-mark.png')} alt="" className="w-64 h-64 object-contain float-logo drop-shadow-[0_0_36px_rgba(91,124,255,0.35)]" />
+        </div>
       </section>
 
       <section>
@@ -942,6 +948,7 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <SeoHead />
+      <Stars />
       <MotionFX />
       <Nav />
       <main>
