@@ -62,6 +62,9 @@ function SeoHead() {
     } else if (path === '/brightmind') {
       title = 'BrightMind — Elite Way Holdings'
       desc = 'South African AI tutoring for Grades R–12. CAPS. Free 70-family pilot until 2 December 2026. brightmind.eliteway.co.za'
+    } else if (path === '/method') {
+      title = 'How House, Closer and Marketing OS run client growth — Elite Way Holdings'
+      desc = 'Three internal desks. AI short and pinned. Leads from this site to WhatsApp. Calendar and kits. No staff URLs. Pretoria.'
     }
     document.title = title
     setMeta('name', 'description', desc)
@@ -367,14 +370,15 @@ const FAQS = [
   ['Can a small brand afford you?', 'Starting prices exist so a spaza-to-studio brand can start. R1 500 is the web floor. WhatsApp if the page is longer than your patience.'],
   ['Why not just hire influencers?', 'Influencers are distribution we already brief. Without architecture — hook, creator, convert — you are decorating. Embedded’s matching sets trended because the video was a system, not a favour.'],
   ['What is BrightMind?', 'BrightMind is Elite Way’s South African AI tutoring app for Grades R–12, CAPS-aligned. Homework help, whiteboard, past-paper style drills, week-by-week plans. Live at brightmind.eliteway.co.za. A 70-family free pilot runs until 2 December 2026. No card during the pilot.'],
-  ['How do you run leads and the house?', 'Internally we run three desks: House (founder view, keys, banking, partner), Closer (sales pipeline, WhatsApp-first quotes), and Marketing OS (calendar, kits, captions). They are staff tools, not public products. Your door is this site, WhatsApp 076 342 5896, or the chat on this page. A public question can become a lead we follow up — we do not publish pipeline, keys, or banking.'],
+  ['How do you run leads and the house?', 'Internally we run three desks: House (founder view, partner thread and pins), Closer (sales pipeline, WhatsApp-first quotes), and Marketing OS (calendar, kits, captions). They are staff tools, not public products. No staff URLs on this site. Your door is this site, WhatsApp 076 342 5896, or the chat. A public question can become a lead we follow up — we do not publish pipeline, keys, or banking. Full record: /method.'],
+  ['How does AI help your clients grow?', 'House AI is short: one thread plus pins so the brief does not scatter. Closer turns a site form or public chat into a WhatsApp card so follow-up is a person, not a void. Marketing OS keeps the week: kits, captions, calendar. Observe is a never-sleeps brief on House only — rule-based, not a public bot dumping internal data. The client never logs into a desk.'],
 ]
 
 function Nav() {
   const [open, setOpen] = useState(false)
   const loc = useLocation()
   useEffect(() => setOpen(false), [loc])
-  const links = [['/', 'Home'], ['/services', 'Packages'], ['/work', 'Work'], ['/brightmind', 'BrightMind'], ['/about', 'About'], ['/faq', 'FAQ'], ['/contact', 'Contact']]
+  const links = [['/', 'Home'], ['/services', 'Packages'], ['/work', 'Work'], ['/brightmind', 'BrightMind'], ['/method', 'How we run'], ['/about', 'About'], ['/contact', 'Contact']]
   return (
     <header className="fixed top-0 inset-x-0 z-50">
       <div className="mx-auto max-w-7xl px-3 py-2 flex items-center justify-between glass mt-2 mx-3">
@@ -421,6 +425,7 @@ function Footer() {
             <Link to="/brightmind">BrightMind</Link>
             <Link to="/about">About</Link>
             <Link to="/faq">FAQ</Link>
+            <Link to="/method">How we run</Link>
             <Link to="/systems">SaaS labs</Link>
             <Link to="/contact">Contact</Link>
           </div>
@@ -575,6 +580,70 @@ function CaseStudy() {
   )
 }
 
+function Method() {
+  const desks = [
+    {
+      name: 'House',
+      role: 'The founder seat',
+      points: [
+        'One partner thread plus pins. The brief stays short. Memory is not a pile of chats.',
+        'Observe never-sleeps brief lives here only — a rule-based night watch, not a public model and not a dump of keys or banking.',
+        'Pipeline view for the operator. Keys stay in the House server file. They are never on this website.',
+      ],
+    },
+    {
+      name: 'Closer',
+      role: 'WhatsApp-first sales',
+      points: [
+        'A form or public chat on this site becomes a card: name, number, what they asked.',
+        'Path is WhatsApp → call → demo → invoice. A human follows up on 076 342 5896.',
+        'Staff desk. No public URL. You do not log in. You message us.',
+      ],
+    },
+    {
+      name: 'Marketing OS',
+      role: 'The week’s growth surface',
+      points: [
+        'Calendar, kits, captions — so client growth is a week, not a vibe.',
+        'AI here is for drafts the operator ships, not auto-posts that invent funding or remaining BrightMind seats.',
+        'Staff desk. No public URL. Your campaign still lives on Work when it is proof.',
+      ],
+    },
+  ]
+  return (
+    <div className="pt-28 max-w-4xl mx-auto px-6 min-h-screen pb-20">
+      <p className="text-[10px] tracking-[0.3em] uppercase text-violet-300 mb-3">Operating record</p>
+      <h1 className="text-4xl md:text-5xl font-black mb-4">How House, Closer and Marketing OS grow a client</h1>
+      <p className="text-white/70 leading-relaxed mb-8">
+        Elite Way Holdings runs three internal desks. They are not products we sell and they have no public staff URLs. They exist so AI stays on the growth of the client — short, pinned, followed up — instead of a chatbot that forgets the brief or publishes the house.
+      </p>
+      <div className="space-y-4 mb-12">
+        {desks.map((d) => (
+          <section key={d.name} className="glass p-6">
+            <p className="text-xs tracking-widest uppercase text-blue-300">{d.role}</p>
+            <h2 className="text-2xl font-black mt-1 mb-3">{d.name}</h2>
+            <ul className="space-y-2 text-sm text-white/65">
+              {d.points.map((p) => <li key={p.slice(0, 40)}>• {p}</li>)}
+            </ul>
+          </section>
+        ))}
+      </div>
+      <section className="mb-12">
+        <h2 className="text-2xl font-black mb-3">What the client actually feels</h2>
+        <ol className="space-y-3 text-sm text-white/70 list-decimal pl-5">
+          <li>They land here or on WhatsApp. The ugly truth first. Listen.</li>
+          <li>House pins the brief. Closer owns the next human message.</li>
+          <li>We architect the smallest system that still wins. Price on the floor you already saw.</li>
+          <li>Marketing OS puts the week on a calendar so growth has a date.</li>
+          <li>They own the work. We handover. Desks stay ours.</li>
+        </ol>
+      </section>
+      <p className="text-xs text-white/40 mb-8">We do not publish pipeline, keys, banking, or desk logins. Crawlers: see /llms.txt.</p>
+      <Link to="/contact" className="btn-primary">WhatsApp the house</Link>
+    </div>
+  )
+}
+
 function About() {
   return (
     <div className="pt-32 max-w-4xl mx-auto px-6 min-h-screen pb-20">
@@ -590,7 +659,7 @@ function About() {
       </div>
       <div className="glass p-6 mb-10">
         <h3 className="font-bold mb-2">How the house actually runs</h3>
-        <p className="text-sm text-white/65 leading-relaxed">Three internal desks — not public products, no staff URLs on this site. <strong className="text-white">House</strong> is the founder seat: pipeline view, keys, banking, partner. <strong className="text-white">Closer</strong> is sales: WhatsApp → call → demo → invoice. <strong className="text-white">Marketing OS</strong> is the week’s surface: kits, captions, calendar. Leads from this website and the public chat land in that book. You talk to us here or on WhatsApp 076 342 5896.</p>
+        <p className="text-sm text-white/65 leading-relaxed">Three internal desks — not public products, no staff URLs. Full record on <Link to="/method" className="text-blue-300">How we run</Link>. You talk to us here or on WhatsApp 076 342 5896.</p>
       </div>
       <Link to="/contact" className="btn-primary">WhatsApp the house</Link>
     </div>
@@ -732,7 +801,10 @@ function Home() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-black mb-4">How we work</h2>
+        <div className="flex items-end justify-between mb-4 gap-4">
+          <h2 className="text-2xl font-black">How we work</h2>
+          <Link to="/method" className="text-sm text-blue-300 shrink-0">House · Closer · Marketing OS →</Link>
+        </div>
         <div className="grid md:grid-cols-4 gap-3">
           {rooms.map(([n, t, d]) => (
             <div key={n} className="glass p-5">
@@ -955,6 +1027,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/method" element={<Method />} />
           <Route path="/brightmind" element={<BrightMind />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/services" element={<ServicesIndex />} />
