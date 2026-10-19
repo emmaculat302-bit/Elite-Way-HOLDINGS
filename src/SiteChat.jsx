@@ -28,7 +28,7 @@ export default function SiteChat() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-[80]">
+    <div className="fixed bottom-5 left-5 z-[80]">
       {open && (
         <div className="mb-3 w-[min(92vw,360px)] rounded-2xl border border-white/15 bg-[#0a0814]/95 backdrop-blur-xl shadow-2xl overflow-hidden">
           <div className="px-4 py-3 flex justify-between items-center bg-gradient-to-r from-[#6c5ce7] to-[#2a4de0]">
@@ -46,8 +46,8 @@ export default function SiteChat() {
           </form>
         </div>
       )}
-      <button type="button" className="btn-primary shadow-lg" onClick={() => setOpen(!open)}>
-        {open ? 'Hide chat' : 'Chat'}
+      <button type="button" className="h-14 w-14 rounded-full bg-[#6c5ce7] shadow-lg text-sm font-bold" onClick={() => setOpen(!open)} aria-label="Ask Elite Way">
+        {open ? '×' : 'AI'}
       </button>
     </div>
   )

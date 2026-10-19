@@ -7,7 +7,9 @@ import DataSystem from './systems/DataSystem'
 import CRM from './systems/CRM'
 import Healthcare from './systems/Healthcare'
 import Business from './systems/Business'
-import MotionFX, { CountUp, useTilt } from './MotionFX'
+import MotionFX, { CountUp } from './MotionFX'
+
+const asset = (p) => `${import.meta.env.BASE_URL}${String(p).replace(/^\//, '')}`
 import SiteChat from './SiteChat'
 
 const IMG = 'https://res.cloudinary.com/f4lhkjhs/image/upload/f_auto,q_auto/eliteway'
@@ -28,8 +30,8 @@ function SeoHead() {
   const loc = useLocation()
   useEffect(() => {
     const path = loc.pathname
-    let title = 'Elite Way Holdings | Elite Way Marketing | Elite Way Club SA — Pretoria tech house'
-    let desc = 'Pretoria-born software house. Elite Way Holdings, Elite Way Marketing, Elite Way Club SA. Tech guru in the making. Investable. On the verge of a breakthrough.'
+    let title = 'Elite Way Holdings — Pretoria software house | web from R1 500'
+    let desc = 'Still running on a WhatsApp status? Pretoria software house. 2.5M+ Embedded views, 100 GDE East halls, 500+ Club SA. Web from R1 500. WhatsApp 076 342 5896.'
     let image = `${SITE}/logo-mark.png`
     if (path.startsWith('/work/')) {
       const c = CASES.find((x) => x.slug === path.split('/')[2])
@@ -371,33 +373,32 @@ function Nav() {
   const [open, setOpen] = useState(false)
   const loc = useLocation()
   useEffect(() => setOpen(false), [loc])
-  const links = [['/', 'Home'], ['/services', 'Packages'], ['/work', 'Work'], ['/brightmind', 'BrightMind'], ['/about', 'About'], ['/contact', 'Contact']]
+  const links = [['/', 'Home'], ['/services', 'Packages'], ['/work', 'Work'], ['/brightmind', 'BrightMind'], ['/about', 'About'], ['/faq', 'FAQ'], ['/contact', 'Contact']]
   return (
     <header className="fixed top-0 inset-x-0 z-50">
-      <motion.div initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="mx-auto max-w-7xl px-3 py-2 flex items-center justify-between glass mt-2 mx-3">
+      <div className="mx-auto max-w-7xl px-3 py-2 flex items-center justify-between glass mt-2 mx-3">
         <Link to="/" className="flex items-center gap-2">
-          <img src="/logo-mark.png?v=3" alt="Elite Way" className="h-9 w-9 object-contain bg-transparent" />
-          <div className="leading-tight hidden sm:block">
-            <div className="font-black tracking-tight">Elite Way</div>
-            <div className="text-[9px] tracking-[0.28em] text-blue-300">HOLDINGS</div>
-          </div>
+          <img src={asset('logo-mark.png')} alt="" className="h-8 w-8 object-contain" />
+          <span className="font-black tracking-tight text-sm hidden sm:block">Elite Way Holdings</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-5 text-sm">
+        <nav className="hidden md:flex items-center gap-5 text-sm" aria-label="Primary">
           {links.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === '/'} className={({ isActive }) => isActive ? 'text-white' : 'text-white/60 hover:text-white'}>{label}</NavLink>
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              className={({ isActive }) =>
+                'pb-0.5 border-b ' + (isActive ? 'text-white border-white' : 'text-white/55 border-transparent hover:text-white')
+              }
+            >{label}</NavLink>
           ))}
-          <OutLink href={WA} className="btn-primary text-sm inline-flex items-center gap-2 py-2 px-4"><IconWhatsApp size={16} /> WhatsApp</OutLink>
         </nav>
-        <button className="md:hidden" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
-      </motion.div>
+        <button className="md:hidden" type="button" aria-label="Menu" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
+      </div>
       {open && (
-        <div className="md:hidden glass mx-4 mt-2 p-4 flex flex-col gap-3">
+        <nav className="md:hidden glass mx-3 mt-2 p-4 flex flex-col gap-3 text-sm" aria-label="Mobile">
           {links.map(([to, label]) => <Link key={to} to={to}>{label}</Link>)}
-          <OutLink href={SOCIAL.instagram} className="inline-flex items-center gap-2"><IconInstagram size={16} /> Instagram</OutLink>
-          <OutLink href={SOCIAL.linkedin} className="inline-flex items-center gap-2"><IconLinkedIn size={16} /> LinkedIn</OutLink>
-          <OutLink href={SOCIAL.twitter} className="inline-flex items-center gap-2"><IconX size={14} /> X</OutLink>
-          <OutLink href={WA} className="btn-primary text-center inline-flex items-center justify-center gap-2"><IconWhatsApp size={16} /> WhatsApp</OutLink>
-        </div>
+        </nav>
       )}
     </header>
   )
@@ -408,7 +409,7 @@ function Footer() {
     <footer className="border-t border-white/10 mt-12 py-8 px-6">
       <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-6 text-sm">
         <div>
-          <img src="/logo-full.png?v=3" alt="Elite Way Holdings" className="h-16 object-contain bg-transparent" />
+          <img src={asset('logo-full.png')} alt="Elite Way Holdings" className="h-16 object-contain bg-transparent" />
           <p className="text-white/50 text-xs mt-2">Pretoria software house. All rights reserved.</p>
         </div>
         <div>
@@ -636,139 +637,115 @@ function BrightMind() {
 }
 
 function Home() {
+  const news = [
+    { when: '17 Aug 2026', t: 'Close the Gap at Shell Okgonne', d: 'ART lost-to-follow-up field day, Ga-Rankuwa. We ran the shared record and reminder app.', to: '/work/art-follow-up' },
+    { when: 'To 2 Dec 2026', t: 'BrightMind CAPS pilot', d: '70 families. Grades R–12. No remaining-seat count here — that lives on the product site.', to: '/brightmind' },
+    { when: 'Campaign', t: 'Embedded Clothing 2.5M+', d: 'Combined organic views. One reel past 2M.', to: '/work/embedded' },
+    { when: 'Pilot', t: '100 GDE East halls', d: 'Edu School Communicator with World Apps. School halls, not classrooms.', to: '/work/edu-school-communicator' },
+  ]
+  const field = [
+    { to: '/work/art-follow-up', t: 'ART field app', d: 'Shared data + appointment reminders at Shell Okgonne.' },
+    { to: '/work/punyete', t: 'PUNYETE tracking', d: 'Online order tracking for the clothing brand.' },
+    { to: '/work/edu-school-communicator', t: 'Edu School Communicator', d: 'Living layer around the app. 100 GDE East halls.' },
+    { to: '/brightmind', t: 'BrightMind', d: 'CAPS tutoring product. Pilot to 2 Dec 2026.' },
+  ]
+  const labs = [
+    { to: '/systems/data', t: 'Clearline', d: 'Data lab' },
+    { to: '/systems/crm', t: 'Housebook', d: 'CRM lab' },
+    { to: '/systems/health', t: 'Wardlight', d: 'Healthcare lab' },
+    { to: '/systems/business', t: 'Tillhouse', d: 'Business OS lab' },
+  ]
+  const rooms = [
+    ['01', 'Listen', 'WhatsApp, a call, or a form. The ugly truth first.'],
+    ['02', 'Architect', 'The smallest system that still wins. Price on the floor you already saw.'],
+    ['03', 'Make', 'You see drafts. You do not vanish into a six-week black box.'],
+    ['04', 'Keep', 'Handover and training. We stay if you want the house staffed.'],
+  ]
   return (
-    <div>
-      <section className="relative min-h-[78vh] grid-bg flex items-center pt-24 overflow-hidden">
-        <motion.div className="glow-orb w-[480px] h-[480px] bg-indigo-700/40 -top-20 -left-20" animate={{ x: [0, 40, 0], y: [0, 20, 0] }} transition={{ duration: 12, repeat: Infinity }} />
-        <motion.div className="glow-orb w-[420px] h-[420px] bg-violet-700/30 bottom-0 right-0" animate={{ x: [0, -30, 0] }} transition={{ duration: 14, repeat: Infinity }} />
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative">
-          <motion.div initial="hidden" animate="show" variants={stagger}>
-            <motion.div variants={fade} className="inline-flex items-center gap-2 text-xs tracking-widest uppercase text-blue-300 mb-4 border border-blue-400/30 rounded-full px-3 py-1">
-              <Sparkles size={14} /> Pretoria · AI · Growth
-            </motion.div>
-            <motion.h1 variants={fade} className="text-4xl md:text-6xl font-black leading-[0.95] tracking-tight">
-              Architects of <span className="text-gradient">digital growth</span>
-            </motion.h1>
-            <motion.p variants={fade} className="mt-4 text-base text-white/70 max-w-xl">
-              <strong className="text-white">Elite Way Holdings</strong> — Marketing, Club SA, same Pretoria operator. Software at the core. Proof first. No invented funding.
-            </motion.p>
-            <motion.div variants={fade} className="mt-6 flex flex-wrap gap-3">
-              <Link to="/services" className="btn-primary inline-flex items-center gap-2">See packages <ArrowRight size={16} /></Link>
-              <OutLink href={WA} className="btn-primary inline-flex items-center gap-2"><IconWhatsApp size={16} /> WhatsApp</OutLink>
-              <Link to="/contact" className="btn-ghost">Request a demo</Link>
-            </motion.div>
-            <motion.div variants={fade} className="mt-6 flex flex-wrap gap-3 text-sm">
-              <div className="glass px-5 py-3"><div className="text-2xl font-black"><CountUp to={2.5} suffix="M+" /></div><div className="text-white/50">combined organic views</div></div>
-              <div className="glass px-5 py-3"><div className="text-2xl font-black"><CountUp to={500} suffix="+" /></div><div className="text-white/50">youth contacts · PTA first</div></div>
-              <div className="glass px-5 py-3"><div className="text-2xl font-black"><CountUp to={100} /></div><div className="text-white/50">schools in pilot</div></div>
-            </motion.div>
-          </motion.div>
-          <div className="relative flex justify-center">
-            <div className="absolute w-80 h-80 rounded-full border border-blue-400/20 spin-slow" />
-            <div className="absolute w-96 h-96 rounded-full border border-violet-400/10 spin-slow" style={{ animationDuration: '40s', animationDirection: 'reverse' }} />
-            <motion.img src="/logo-mark.png?v=3" alt="Elite Way mark" className="w-72 h-72 object-contain relative bg-transparent drop-shadow-[0_0_40px_rgba(42,77,224,0.7)]"
-              animate={{ y: [0, -14, 0], rotateZ: [0, 2, 0] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} />
-          </div>
+    <div className="pt-24 pb-20 px-6 max-w-7xl mx-auto space-y-14">
+      <section>
+        <h1 className="text-4xl md:text-5xl font-black leading-tight max-w-3xl">
+          Still running the business on a WhatsApp status?
+        </h1>
+        <p className="mt-4 text-white/70 max-w-xl text-lg">Pretoria software house. A real site and a convert path — not a bio link.</p>
+        <dl className="mt-8 grid grid-cols-3 gap-4 max-w-xl">
+          <div><dt className="text-2xl font-black">2.5M+</dt><dd className="text-xs text-white/45">Embedded organic views</dd></div>
+          <div><dt className="text-2xl font-black">100</dt><dd className="text-xs text-white/45">GDE East school halls</dd></div>
+          <div><dt className="text-2xl font-black">500+</dt><dd className="text-xs text-white/45">Club SA contacts</dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <div className="flex items-end justify-between mb-4">
+          <h2 className="text-2xl font-black">News</h2>
+          <Link to="/work" className="text-sm text-blue-300">Work archive →</Link>
+        </div>
+        <div className="grid md:grid-cols-2 gap-3">
+          {news.map((n) => (
+            <Link key={n.t} to={n.to} className="glass p-5 block">
+              <p className="text-[10px] tracking-widest uppercase text-violet-300">{n.when}</p>
+              <h3 className="font-bold mt-1">{n.t}</h3>
+              <p className="text-sm text-white/55 mt-1">{n.d}</p>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <div className="overflow-hidden border-y border-white/10 py-3 bg-white/[0.02]">
-        <div className="marquee gap-10 text-sm tracking-[0.25em] uppercase text-white/40">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="flex gap-10 pr-10">
-              {['Software', 'AI', 'Close the Gap', 'Shell Okgonne', 'Community', 'SaaS', 'Edu School Communicator', 'GDE', 'Pretoria', 'Elite Way Holdings'].map(w => <span key={w + i}>{w} ✦</span>)}
-            </div>
-          ))}
+      <section>
+        <div className="flex items-end justify-between mb-4">
+          <h2 className="text-2xl font-black">Work</h2>
+          <Link to="/work" className="text-sm text-blue-300">All work →</Link>
         </div>
-      </div>
-
-      <section className="max-w-7xl mx-auto px-6 py-10" id="who">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-violet-300 mb-3">One house</p>
-        <h2 className="text-3xl md:text-5xl font-black mb-6">Holdings. Marketing. Club SA.</h2>
         <div className="grid md:grid-cols-3 gap-4">
-          <div className="glass p-6">
-            <h3 className="font-bold mb-2">Same Pretoria operator</h3>
-            <p className="text-sm text-white/65 leading-relaxed">Club was the community. Holdings is the software vessel. Marketing is how the city hears us.</p>
-          </div>
-          <div className="glass p-6">
-            <h3 className="font-bold mb-2">Software at the core</h3>
-            <p className="text-sm text-white/65 leading-relaxed">A site, a system, a product that enrols, books, bills, and remembers — still running at 2am.</p>
-          </div>
-          <div className="glass p-6">
-            <h3 className="font-bold mb-2">Proof, not a slide</h3>
-            <p className="text-sm text-white/65 leading-relaxed">2.5M organic. 100 GDE East halls. 500+ Club. No invented funding. <Link to="/about" className="text-blue-300">About →</Link></p>
-          </div>
+          {CASES.filter((c) => ['art-follow-up', 'embedded', 'edu-school-communicator'].includes(c.slug)).map((c, i) => (
+            <CaseCard key={c.slug} c={c} i={i} />
+          ))}
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 pb-8">
-        <Link to="/brightmind" className="glass p-8 block hover:-translate-y-1 transition">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-violet-300 mb-2">Our tutoring product</p>
-          <h2 className="text-3xl font-black mb-2">BrightMind</h2>
-          <p className="text-white/65 max-w-2xl leading-relaxed">Free AI matric / CAPS tutoring in pilot — 70 families until 2 December 2026. Homework, whiteboard, past papers. Live at brightmind.eliteway.co.za.</p>
-          <span className="text-sm text-blue-300 mt-4 inline-flex items-center gap-1">Read BrightMind <ArrowRight size={14} /></span>
-        </Link>
+      <section>
+        <h2 className="text-2xl font-black mb-2">Systems we built</h2>
+        <p className="text-sm text-white/50 mb-4">Shipped in the field. Labs are clickable previews, not live products.</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          {field.map((s) => (
+            <Link key={s.t} to={s.to} className="glass p-5 block">
+              <h3 className="font-bold">{s.t}</h3>
+              <p className="text-sm text-white/55 mt-1">{s.d}</p>
+            </Link>
+          ))}
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {labs.map((s) => (
+            <Link key={s.t} to={s.to} className="border border-white/10 rounded-2xl p-4 block">
+              <p className="text-[10px] tracking-widest uppercase text-white/35">Preview</p>
+              <h3 className="font-bold mt-1">{s.t}</h3>
+              <p className="text-sm text-white/50">{s.d}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
-      <motion.section className="max-w-7xl mx-auto px-6 py-8" initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
-        <motion.h2 variants={fade} className="text-3xl font-black mb-2">What we architect</motion.h2>
-        <motion.p variants={fade} className="text-white/60 mb-10">Starting prices in ZAR. Tap a door.</motion.p>
-        <div className="grid md:grid-cols-3 gap-5">
-          {SERVICES.map((s) => {
-            const Icon = s.Icon
-            return (
-              <Link key={s.slug} to={`/services/${s.slug}`} className="block">
-                <motion.div variants={fade} className="glass p-6 h-full tilt-card">
-                  <Icon className="text-blue-400 mb-3" />
-                  <h3 className="font-bold mb-2">{s.title}</h3>
-                  <p className="text-sm text-white/60 mb-4">{s.blurb}</p>
-                  <div className="text-sm text-blue-300 font-semibold">{s.custom ? 'Custom pricing' : `Packages from ${s.from}`} →</div>
-                </motion.div>
-              </Link>
-            )
-          })}
-        </div>
-      </motion.section>
-
-      <section className="max-w-7xl mx-auto px-6 pb-8">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-violet-300 mb-3">How a brief becomes a thing</p>
-        <h2 className="text-3xl font-black mb-8">Four rooms</h2>
-        <div className="grid md:grid-cols-4 gap-4">
-          {[
-            ['01', 'Listen', 'WhatsApp, a call, or a form. The ugly truth first.'],
-            ['02', 'Architect', 'The smallest system that still wins. Price on the floor you already saw.'],
-            ['03', 'Make', 'You see drafts. You do not vanish into a six-week black box.'],
-            ['04', 'Keep', 'Handover, training, retainers. We care after the invoice.'],
-          ].map(([n, t, d]) => (
-            <div key={n} className="glass p-6">
-              <div className="text-blue-400 font-black text-sm mb-2">{n}</div>
-              <h3 className="font-bold mb-2">{t}</h3>
-              <p className="text-sm text-white/60 leading-relaxed">{d}</p>
+      <section>
+        <h2 className="text-2xl font-black mb-4">How we work</h2>
+        <div className="grid md:grid-cols-4 gap-3">
+          {rooms.map(([n, t, d]) => (
+            <div key={n} className="glass p-5">
+              <div className="text-blue-400 font-black text-sm">{n}</div>
+              <h3 className="font-bold mt-1">{t}</h3>
+              <p className="text-sm text-white/55 mt-2">{d}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-8" id="cases">
-        <div className="flex items-end justify-between mb-6 gap-4">
-          <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-violet-300 mb-2">Proof</p>
-            <h2 className="text-3xl font-black">Three studies. The rest is in the archive.</h2>
-          </div>
-          <Link to="/work" className="text-sm text-blue-300 shrink-0">All work →</Link>
+      <section className="glass p-6 md:p-8 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-black">WhatsApp 076 342 5896</h2>
+          <p className="text-sm text-white/55">Packages from R1 500. FAQ if you want it in writing.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
-          {CASES.slice(0, 3).map((c, i) => <CaseCard key={c.slug} c={c} i={i} />)}
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="glass p-10 flex flex-wrap items-center justify-between gap-6">
-          <div>
-            <h2 className="text-3xl font-black">Door is WhatsApp.</h2>
-            <p className="text-white/60 mt-2">076 342 5896 · Pretoria. Questions: <Link to="/faq" className="text-blue-300">FAQ</Link>.</p>
-          </div>
-          <OutLink href={WA} className="btn-primary inline-flex items-center gap-2"><IconWhatsApp size={16} /> Chat the house</OutLink>
+        <div className="flex flex-wrap gap-3">
+          <Link to="/services" className="btn-ghost">Packages</Link>
+          <Link to="/contact" className="btn-ghost">Contact</Link>
         </div>
       </section>
     </div>
@@ -959,20 +936,15 @@ function Contact() {
   )
 }
 
-function TiltBinder() {
-  useTilt()
-  return null
-}
-
 export default function App() {
   const loc = useLocation()
+  useEffect(() => { window.scrollTo(0, 0) }, [loc.pathname])
   return (
     <div className="min-h-screen">
       <SeoHead />
       <MotionFX />
-      <TiltBinder key={loc.pathname} />
       <Nav />
-      <motion.div key={loc.pathname} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}>
+      <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -988,8 +960,9 @@ export default function App() {
           <Route path="/systems/health" element={<Healthcare />} />
           <Route path="/systems/business" element={<Business />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Home />} />
         </Routes>
-      </motion.div>
+      </main>
       <Footer />
       <SiteChat />
     </div>

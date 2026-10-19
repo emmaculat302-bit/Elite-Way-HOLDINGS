@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.eliteway.co.za/sitemap.xml
+# Fact file for AI crawlers
+# https://www.eliteway.co.za/llms.txt
 
 User-agent: GPTBot
 Allow: /

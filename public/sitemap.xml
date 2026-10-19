@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.eliteway.co.za/</loc></url>
+  <url><loc>https://www.eliteway.co.za/services</loc></url>
   <url><loc>https://www.eliteway.co.za/work</loc></url>
   <url><loc>https://www.eliteway.co.za/work/art-follow-up</loc></url>
-  <url><loc>https://www.eliteway.co.za/work/punyete</loc></url>
   <url><loc>https://www.eliteway.co.za/work/punyete</loc></url>
   <url><loc>https://www.eliteway.co.za/work/soshanguve</loc></url>
   <url><loc>https://www.eliteway.co.za/work/edu-school-communicator</loc></url>
   <url><loc>https://www.eliteway.co.za/work/embedded</loc></url>
   <url><loc>https://www.eliteway.co.za/work/foreal</loc></url>
   <url><loc>https://www.eliteway.co.za/work/luyuanda</loc></url>
-  <url><loc>https://www.eliteway.co.za/services</loc></url>
-  <url><loc>https://www.eliteway.co.za/systems</loc></url>
+  <url><loc>https://www.eliteway.co.za/brightmind</loc></url>
+  <url><loc>https://www.eliteway.co.za/about</loc></url>
+  <url><loc>https://www.eliteway.co.za/faq</loc></url>
   <url><loc>https://www.eliteway.co.za/contact</loc></url>
   <url><loc>https://www.eliteway.co.za/llms.txt</loc></url>
 </urlset>

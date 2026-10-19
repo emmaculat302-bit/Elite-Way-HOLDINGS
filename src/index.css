@@ -51,21 +51,7 @@ h1, h2, h3, .font-black { font-family: "Space Grotesk", Inter, sans-serif; }
   75% { transform: translateY(calc(var(--py, 0px) - 30px)) rotate(270deg) scale(1.05); }
 }
 
-.cursor-follower, .cursor-dot { display: none; }
-@media (pointer: fine) {
-  body:not(.sales-desk), body:not(.sales-desk) a, body:not(.sales-desk) button { cursor: none; }
-  .cursor-follower {
-    display: block; width: 20px; height: 20px; border: 2px solid #6c5ce7;
-    border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000;
-    transform: translate(-50%, -50%);
-    transition: width .3s, height .3s, border-color .3s;
-  }
-  .cursor-dot {
-    display: block; width: 6px; height: 6px; background: #00cec9;
-    border-radius: 50%; position: fixed; pointer-events: none; z-index: 10001;
-    transform: translate(-50%, -50%);
-  }
-}
+
 
 .wa-fab {
   position: fixed; bottom: 24px; right: 24px; z-index: 10050;
@@ -73,14 +59,8 @@ h1, h2, h3, .font-black { font-family: "Space Grotesk", Inter, sans-serif; }
   background: #25d366; color: #fff;
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45);
-  animation: whatsappPulse 2s infinite;
   pointer-events: auto;
   cursor: pointer;
-}
-@keyframes whatsappPulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
-  70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
 .tilt-card { transition: transform 0.18s ease; transform-style: preserve-3d; }
@@ -115,15 +95,7 @@ h1, h2, h3, .font-black { font-family: "Space Grotesk", Inter, sans-serif; }
 .btn-primary { position: relative; overflow: hidden; }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(107,45,255,0.6); }
 
-nav a { position: relative; }
-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px; left: 0; width: 0; height: 2px;
-  background: linear-gradient(135deg, #2a4de0, #6b2dff);
-  transition: width .3s ease;
-}
-nav a:hover::after { width: 100%; }
+
 
 .btn-ghost {
   background: transparent;
